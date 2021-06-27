@@ -1,0 +1,28 @@
+os: linux
+
+arch:
+  - ppc64le
+
+language: "node_js"
+
+node_js:
+  - "12"
+  
+before_install:
+  - "npm cache clean --force"
+  
+install:
+  - "npm install -g gitbook"
+  - "npm install -g gitbook-cli --force"
+
+branches:
+  only:
+    - master
+env:
+  global:
+    - GH_REF: github.com/bond-huang/ebook.git
+    - secure: "AAAAB3NzaC1yc2EAAAADAQABAAABgQDN783q7WwWmgZVmyUjO9qq2UMReh/eTimiHNIohJgWRV1ZwpTcFcDkTSij67uLJ1F8flounyWGKBfDHv12zw84WhjIQEqpkm7o591l+tY7YEvnPgJq/kILrYRZu1N8g7aLl7oF2sHEgD/xb+KiVzhsFQtwkJOHRUGszmrB3hLpNv4ta65wGdRLwAgKvOJYKuMJt7q6Ir2cjzd5J+ctyuyz4vv4LlxNUy3cDbawTXjhiQeBSMe8tVx4miIp7aiJQkbgUqsshOMnH95VptUDCDK3+sfHTDrTC85hnniS9UfU9dvfXBqnOVM+meKiLWHMl60NAKvvOjtYYm/htKnXwfifVmoDWCzdVYY87JskKvqVl1XIUbktOVZ6KhCM03UkTYqsjBsK0qnMrTUIs1vh1vNfpCCm38vw8g+iJXgC/asx2Hma9UWbEYDmNCjt5FNzHggAUWOklfb9XBRBjEz8woKe6zHNAju+0FDU9TzaTz1claE4AiyP7VU7CXU+QhVabfc= AzureAD+QianHuang@DESKTOP-TUI7PSP"
+#sudo: false
+script:
+  - bash summary_crt.sh
+  - travis_wait 100 bash deploy.sh
